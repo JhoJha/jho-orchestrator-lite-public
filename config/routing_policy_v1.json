@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "interactive": {
+    "fast_low_risk": {
+      "preferred": [
+        "opencode-free/nemotron-3.5-lightning-free/default",
+        "opencode-free/ling-3.0-flash-fin-free/medium",
+        "agy/gemini-3.8-flash/low"
+      ]
+    },
+    "medium": {
+      "preferred": [
+        "opencode-go/deepseek-v4.1-flash/high",
+        "opencode-go/qwen3.8-flash/xhigh",
+        "opencode-free/muse-spark-1.3-contributor-free/xhigh",
+        "agy/gemini-3.8-flash/medium",
+        "codex/gpt-5.6-luna/max"
+      ]
+    },
+    "high": {
+      "preferred": [
+        "opencode-go/deepseek-v4.1-flash/max",
+        "opencode-go/kimi-k3/max",
+        "opencode-go/glm-5.3/max",
+        "agy/gemini-3.1-pro/high",
+        "agy/claude-sonnet-4-6/thinking",
+        "codex/gpt-5.6-terra/high"
+      ]
+    },
+    "critical": {
+      "plan": [
+        "codex/gpt-5.6-sol/high",
+        "codex/gpt-5.6-sol/xhigh"
+      ],
+      "implement": [
+        "codex/gpt-5.6-terra/high",
+        "agy/claude-sonnet-4-6/thinking",
+        "opencode-go/deepseek-v4.1-flash/max"
+      ],
+      "review": [
+        "codex/gpt-5.6-sol/high",
+        "agy/claude-opus-4-6-thinking/thinking",
+        "agy/gemini-3.1-pro/high"
+      ],
+      "constraint": "reviewer_should_differ_from_worker_provider_when_practical"
+    }
+  },
+  "background_long": {
+    "provider": "nvidia",
+    "allowed_when": [
+      "user explicitly allows long-running work",
+      "user is leaving / sleeping / in class / away",
+      "task can tolerate high latency",
+      "shadow review / audit / benchmark / test generation / documentation"
+    ]
+  }
+}

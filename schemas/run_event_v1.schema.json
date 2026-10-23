@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Jho Lite Run Event v1",
+  "type": "object",
+  "required": [
+    "event_version",
+    "run_id",
+    "task_id",
+    "event_type",
+    "timestamp",
+    "harness",
+    "model",
+    "role"
+  ],
+  "properties": {
+    "event_version": {
+      "const": "1.0"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "task_id": {
+      "type": "string"
+    },
+    "trace_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "span_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "parent_span_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "event_type": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "task_class": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "risk": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "intrinsic_complexity": {
+      "type": [
+        "string",
+        "number",
+        "null"
+      ]
+    },
+    "historical_difficulty": {
+      "type": [
+        "string",
+        "number",
+        "null"
+      ]
+    },
+    "harness": {
+      "type": "string"
+    },
+    "access_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "provider": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model": {
+      "type": "string"
+    },
+    "variant": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "effort": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "role": {
+      "type": "string"
+    },
+    "execution_class": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "interactive",
+        "background_long",
+        null
+      ]
+    },
+    "quota_before": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "quota_after": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "duration_seconds": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "tests_passed": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "validator_result": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "review_result": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "review_findings_count": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "attempt": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "rework_count": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "first_pass_success": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "final_success": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "failure_category": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "failure_attribution": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

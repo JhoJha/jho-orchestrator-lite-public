@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SELF="$(readlink -f "${BASH_SOURCE[0]}")"
+ROOT="$(cd "$(dirname "$SELF")/.." && pwd)"
+
+cmd="${1:-help}"
+if [[ $# -gt 0 ]]; then shift; fi
+
+case "$cmd" in
+  run)
+    exec python3 "$ROOT/runner/jho_operator.py" "$@"
+    ;;
+  tui)
+    exec python3 "$ROOT/runner/jho_tui.py" "$@"
+    ;;
+  notify-test)
+    exec python3 - "$@" <<'PY'
+import importlib.util
+from pathlib import Path
+import sys
+
+candidates = [
+    Path.home() / "tools/jho-orchestrator-lite/local_jho/runner/jho_lite.py",
+    Path(__file__).resolve() if False else Path("/nonexistent"),
+]
+for path in candidates:
+    if not path.is_file():
+        continue
+    spec = importlib.util.spec_from_file_location("jho_notify_test", path)
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        previous_cwd = Path.cwd()
+        try:
+            spec.loader.exec_module(mod)
+        finally:
+            import os
+            os.chdir(previous_cwd)
+        if callable(getattr(mod, "notification_test", None)):
+            raise SystemExit(mod.notification_test())
+print("Jho notification backend unavailable", file=sys.stderr)
+raise SystemExit(5)
+PY
+    ;;
+  help|-h|--help)
+    cat <<'EOF'
+Jho Operational v1
+
+Usage:
+  jho run [options]        Run the Operational v1 coordinator
+  jho tui [options]        Open/read the read-only TUI
+  jho notify-test          Send a Windows notification test
+  jho help                 Show this help
+
+Examples:
+  jho run --dry-run \
+    --task-id DEMO \
+    --repo ~/repos/project \
+    --allowed-path app.py \
+    --task "Make the bounded change" \
+    --candidate codex:gpt-5.6-sol@high \
+    --reviewer-candidate codex:gpt-5.6-luna@max
+
+Safety:
+  No automatic commit, push, merge, deploy, migration, or credential changes.
+EOF
+    ;;
+  *)
+    echo "Unknown command: $cmd" >&2
+    exit 2
+    ;;
+esac

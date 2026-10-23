@@ -1,0 +1,45 @@
+# Secrets / environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*
+secrets*
+settings.json
+
+# Runtime / telemetry
+telemetry/
+runs.jsonl
+agent-runs/
+outputs/
+exports/
+logs/
+*.log
+
+# Local runtime overlay / backups
+local_jho/
+*.bak
+*.bak-*
+*.tmp
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Windows bridge
+wsl-files/
+
+# Test caches
+.pytest_cache/
+.ruff_cache/

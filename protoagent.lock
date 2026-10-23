@@ -1,0 +1,4 @@
+# protoAgent pin used by Jho Orchestrator Lite v0.2.5
+version=v0.163.0
+commit=8134031fa1f0f51ec557595189eb44d1eded5da8
+repository=https://github.com/protoLabsAI/protoAgent

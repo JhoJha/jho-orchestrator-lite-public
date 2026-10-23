@@ -1,0 +1,636 @@
+{
+  "schema_version": "1.0",
+  "name": "Jho Candidate Registry v1",
+  "principles": {
+    "unit_of_evaluation": "harness + access_path + model + variant_or_effort + role",
+    "external_benchmarks_are": "priors_only",
+    "local_metrics_are": "authoritative_over_time",
+    "exploration": "allowed_for_eligible_candidates"
+  },
+  "hard_rules": [
+    {
+      "id": "RULE-001",
+      "name": "Never use Astra",
+      "match": {
+        "harness": "codex",
+        "model": "gpt-6-astra"
+      },
+      "action": "deny",
+      "reason": "User policy: excellent model, but too expensive."
+    },
+    {
+      "id": "RULE-002",
+      "name": "Do not route GPT through OpenCode",
+      "match": {
+        "harness": "opencode",
+        "model_family": "gpt"
+      },
+      "action": "deny",
+      "reason": "GPT capacity is already available directly through Codex."
+    },
+    {
+      "id": "RULE-003",
+      "name": "NVIDIA is background-long only",
+      "match": {
+        "harness": "opencode",
+        "access_path": "nvidia"
+      },
+      "action": "background_long_only",
+      "reason": "Observed latency/restrictions make NVIDIA unsuitable for interactive routing."
+    },
+    {
+      "id": "RULE-004",
+      "name": "Variants are separate candidates",
+      "action": "preserve_variants",
+      "reason": "Different reasoning intensities are evaluated independently."
+    },
+    {
+      "id": "RULE-005",
+      "name": "Harness parity",
+      "action": "uniform_logical_contract",
+      "reason": "Codex, OpenCode and AGY must expose the same logical contract to Jho Lite: explicit candidate identity, unattended execution, policy decided before the run, live progress, timeout, telemetry and a terminal result."
+    }
+  ],
+  "pools": {
+    "codex": [
+      {
+        "model": "gpt-5.6-luna",
+        "efforts": [
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "initial_preference": [
+          "max",
+          "xhigh",
+          "high"
+        ],
+        "roles": [
+          "worker",
+          "reviewer"
+        ]
+      },
+      {
+        "model": "gpt-5.6-terra",
+        "efforts": [
+          "high",
+          "xhigh",
+          "max",
+          "ultra"
+        ],
+        "initial_preference": [
+          "high",
+          "xhigh",
+          "max",
+          "ultra"
+        ],
+        "roles": [
+          "worker",
+          "reviewer"
+        ]
+      },
+      {
+        "model": "gpt-5.6-sol",
+        "efforts": [
+          "high",
+          "xhigh",
+          "max",
+          "ultra"
+        ],
+        "initial_preference": [
+          "high",
+          "xhigh",
+          "max",
+          "ultra"
+        ],
+        "roles": [
+          "lead",
+          "architect",
+          "reviewer",
+          "critical_worker"
+        ]
+      },
+      {
+        "model": "gpt-5.5",
+        "efforts": [
+          "high",
+          "xhigh"
+        ],
+        "initial_preference": [
+          "high",
+          "xhigh"
+        ],
+        "roles": [
+          "challenger",
+          "reviewer"
+        ]
+      }
+    ],
+    "agy": [
+      {
+        "model": "gemini-3.8-flash",
+        "efforts": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "roles": [
+          "worker",
+          "reviewer",
+          "challenger"
+        ]
+      },
+      {
+        "model": "gemini-3.7-flash",
+        "efforts": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "roles": [
+          "worker",
+          "reviewer",
+          "challenger"
+        ]
+      },
+      {
+        "model": "gemini-3.6-flash",
+        "efforts": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "roles": [
+          "worker",
+          "challenger"
+        ]
+      },
+      {
+        "model": "gemini-3.1-pro",
+        "efforts": [
+          "low",
+          "high"
+        ],
+        "roles": [
+          "worker",
+          "reviewer"
+        ]
+      },
+      {
+        "model": "claude-sonnet-4-6",
+        "efforts": [
+          "thinking"
+        ],
+        "roles": [
+          "worker",
+          "reviewer"
+        ]
+      },
+      {
+        "model": "claude-opus-4-6-thinking",
+        "efforts": [
+          "thinking"
+        ],
+        "roles": [
+          "reviewer",
+          "critical_worker"
+        ]
+      },
+      {
+        "model": "gpt-oss-120b",
+        "efforts": [
+          "medium"
+        ],
+        "roles": [
+          "challenger",
+          "worker"
+        ]
+      }
+    ],
+    "opencode_free": [
+      {
+        "model": "big-pickle",
+        "efforts": [
+          "default"
+        ],
+        "roles": [
+          "exploration",
+          "low_risk_worker"
+        ]
+      },
+      {
+        "model": "ling-3.0-flash-fin-free",
+        "efforts": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "roles": [
+          "worker",
+          "challenger"
+        ]
+      },
+      {
+        "model": "mimo-v2.5-free",
+        "efforts": [
+          "default"
+        ],
+        "roles": [
+          "worker",
+          "challenger"
+        ]
+      },
+      {
+        "model": "muse-spark-1.2-contributor-free",
+        "efforts": [
+          "minimal",
+          "low",
+          "medium",
+          "high",
+          "xhigh"
+        ],
+        "roles": [
+          "worker",
+          "challenger"
+        ]
+      },
+      {
+        "model": "muse-spark-1.3-contributor-free",
+        "efforts": [
+          "minimal",
+          "low",
+          "medium",
+          "high",
+          "xhigh"
+        ],
+        "roles": [
+          "worker",
+          "challenger"
+        ]
+      },
+      {
+        "model": "nemotron-3-ultra-free",
+        "efforts": [
+          "default"
+        ],
+        "roles": [
+          "worker",
+          "challenger"
+        ]
+      },
+      {
+        "model": "nemotron-3.5-lightning-free",
+        "efforts": [
+          "default"
+        ],
+        "roles": [
+          "worker",
+          "challenger",
+          "fast_path"
+        ]
+      }
+    ],
+    "opencode_go": [
+      {
+        "model": "deepseek-v4-flash",
+        "efforts": [
+          "low",
+          "high",
+          "max"
+        ],
+        "status": "challenger"
+      },
+      {
+        "model": "deepseek-v4-flash-vision-exp",
+        "efforts": [
+          "low",
+          "high",
+          "max"
+        ],
+        "status": "specialized"
+      },
+      {
+        "model": "deepseek-v4-pro",
+        "efforts": [
+          "high",
+          "max"
+        ],
+        "status": "legacy_fallback"
+      },
+      {
+        "model": "deepseek-v4.1-flash",
+        "efforts": [
+          "low",
+          "high",
+          "max"
+        ],
+        "status": "provisional_champion"
+      },
+      {
+        "model": "glm-5.1",
+        "efforts": [
+          "default"
+        ],
+        "status": "exploration"
+      },
+      {
+        "model": "glm-5.2",
+        "efforts": [
+          "high",
+          "max"
+        ],
+        "status": "challenger"
+      },
+      {
+        "model": "glm-5.3",
+        "efforts": [
+          "low",
+          "high",
+          "max"
+        ],
+        "status": "top_challenger"
+      },
+      {
+        "model": "glm-5.3-flash",
+        "efforts": [
+          "low",
+          "high",
+          "max"
+        ],
+        "status": "challenger"
+      },
+      {
+        "model": "grok-4.6",
+        "efforts": [
+          "low",
+          "medium",
+          "high",
+          "xhigh"
+        ],
+        "status": "top_challenger"
+      },
+      {
+        "model": "hy3",
+        "efforts": [
+          "none",
+          "low",
+          "high"
+        ],
+        "status": "top_challenger"
+      },
+      {
+        "model": "hy4-preview",
+        "efforts": [
+          "none",
+          "high"
+        ],
+        "status": "exploration"
+      },
+      {
+        "model": "kimi-k2.6",
+        "efforts": [
+          "default"
+        ],
+        "status": "exploration"
+      },
+      {
+        "model": "kimi-k2.7-code",
+        "efforts": [
+          "default"
+        ],
+        "status": "challenger"
+      },
+      {
+        "model": "kimi-k3",
+        "efforts": [
+          "max"
+        ],
+        "status": "top_challenger"
+      },
+      {
+        "model": "longcat-2.0",
+        "efforts": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "status": "challenger"
+      },
+      {
+        "model": "mimo-v2.5",
+        "efforts": [
+          "default"
+        ],
+        "status": "challenger"
+      },
+      {
+        "model": "mimo-v2.5-pro",
+        "efforts": [
+          "default"
+        ],
+        "status": "top_challenger"
+      },
+      {
+        "model": "minimax-m2.7",
+        "efforts": [
+          "default"
+        ],
+        "status": "exploration"
+      },
+      {
+        "model": "minimax-m3",
+        "efforts": [
+          "none",
+          "thinking"
+        ],
+        "status": "challenger"
+      },
+      {
+        "model": "muse-spark-1.2-contributor",
+        "efforts": [
+          "minimal",
+          "low",
+          "medium",
+          "high",
+          "xhigh"
+        ],
+        "status": "challenger"
+      },
+      {
+        "model": "muse-spark-1.3-contributor",
+        "efforts": [
+          "minimal",
+          "low",
+          "medium",
+          "high",
+          "xhigh"
+        ],
+        "status": "top_challenger"
+      },
+      {
+        "model": "qwen3.6-plus",
+        "efforts": [
+          "default"
+        ],
+        "status": "exploration"
+      },
+      {
+        "model": "qwen3.7-max",
+        "efforts": [
+          "default"
+        ],
+        "status": "exploration"
+      },
+      {
+        "model": "qwen3.7-plus",
+        "efforts": [
+          "default"
+        ],
+        "status": "exploration"
+      },
+      {
+        "model": "qwen3.8-flash",
+        "efforts": [
+          "low",
+          "medium",
+          "xhigh"
+        ],
+        "status": "top_challenger"
+      },
+      {
+        "model": "qwen3.8-max",
+        "efforts": [
+          "low",
+          "medium",
+          "xhigh"
+        ],
+        "status": "top_challenger"
+      }
+    ],
+    "nvidia_background_long": [
+      {
+        "model": "deepseek-ai/deepseek-v4-flash-0731",
+        "efforts": [
+          "none",
+          "high",
+          "max"
+        ]
+      },
+      {
+        "model": "deepseek-ai/deepseek-v4-pro-0813",
+        "efforts": [
+          "none",
+          "high",
+          "max"
+        ]
+      },
+      {
+        "model": "moonshotai/kimi-k3",
+        "efforts": [
+          "low",
+          "high",
+          "max"
+        ]
+      },
+      {
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "efforts": [
+          "low",
+          "medium",
+          "high"
+        ]
+      },
+      {
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "efforts": [
+          "low",
+          "medium",
+          "high"
+        ]
+      },
+      {
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "efforts": [
+          "low",
+          "medium",
+          "high"
+        ]
+      },
+      {
+        "model": "qwen/qwen3-coder-480b-a35b-instruct",
+        "efforts": [
+          "default"
+        ]
+      },
+      {
+        "model": "qwen/qwen3.5-397b-a17b",
+        "efforts": [
+          "default"
+        ]
+      },
+      {
+        "model": "stepfun-ai/step-3.7-flash",
+        "efforts": [
+          "minimal",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ]
+      },
+      {
+        "model": "z-ai/glm-5.2",
+        "efforts": [
+          "high",
+          "max"
+        ]
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "efforts": [
+          "low",
+          "medium",
+          "high"
+        ]
+      }
+    ]
+  },
+  "initial_external_priors": {
+    "opencode_go": {
+      "deepseek-v4.1-flash": "S",
+      "kimi-k3": "S",
+      "glm-5.3": "S",
+      "hy3": "A+",
+      "grok-4.6": "A+",
+      "qwen3.8-max": "A+",
+      "qwen3.8-flash": "A+",
+      "muse-spark-1.3-contributor": "A+",
+      "mimo-v2.5-pro": "A",
+      "kimi-k2.7-code": "A-",
+      "longcat-2.0": "A-",
+      "minimax-m3": "A-"
+    },
+    "opencode_free": {
+      "muse-spark-1.3-contributor-free/xhigh": "A",
+      "muse-spark-1.3-contributor-free/high": "A-",
+      "ling-3.0-flash-fin-free/high": "A-",
+      "nemotron-3-ultra-free/default": "explore",
+      "nemotron-3.5-lightning-free/default": "explore"
+    },
+    "codex": {
+      "gpt-5.6-sol/high": "lead_default",
+      "gpt-5.6-luna/max": "preferred_luna",
+      "gpt-5.6-terra/high": "strong_worker",
+      "gpt-6-astra/*": "DENY"
+    },
+    "agy": {
+      "gemini-3.8-flash/high": "top_challenger",
+      "gemini-3.8-flash/medium": "balanced_challenger",
+      "gemini-3.7-flash/high": "challenger",
+      "gemini-3.1-pro/high": "strong_worker",
+      "claude-sonnet-4-6/thinking": "strong_worker_reviewer",
+      "claude-opus-4-6-thinking/thinking": "critical_reviewer"
+    }
+  }
+}
