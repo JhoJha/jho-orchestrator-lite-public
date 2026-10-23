@@ -69,3 +69,7 @@ python3 scripts/validate_repo.py
 ## Stack
 
 Python 3 · Bash · ACP (Agent Client Protocol) · Codex CLI · OpenCode · Google Antigravity CLI · protoAgent · JSONL telemetry · `unittest` · WSL2
+
+## Licencia
+
+© 2026 Jhon Villegas — [MIT](LICENSE). protoAgent es un proyecto aparte, también bajo MIT.
