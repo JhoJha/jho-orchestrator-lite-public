@@ -53,6 +53,7 @@ python3 scripts/validate_repo.py
 
 ## Qué no funciona / quedó pendiente
 
+- **Funcionó, pero frágil.** El pipeline v1 se corrió 3 veces sobre una tarea real (14-sep-2026): 1 vez de punta a punta (worker → validadores PASS → reviewer APPROVE), 1 vez falló porque el worker excedió los 900 s y 1 vez quedó sin resultado. Los timeouts de los harnesses fueron el problema principal.
 - **No es independiente:** depende de un checkout fijado de protoAgent y de un bootstrap local. En una máquina limpia hay que instalarlo primero; `run` sin `--dry-run` invoca modelos reales y consume cuota.
 - **Varios documentos están desactualizados.** `docs/CURRENT_STATE.md` y `CHANGELOG.md` describen v0.2.5 y la lista de "no implementado" de ese momento. El pipeline con worktree, worker, validadores y reviewer (v1) se agregó después y no se reflejó en todos los documentos.
 - No hay routing automático, scheduling según cuotas ni comparación estadística entre modelos: la visión de "optimizador adaptativo de flujos" está documentada pero no implementada.
